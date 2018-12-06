@@ -2,7 +2,7 @@
   <div>
     <h3>s-request演示</h3>
     <s-request
-      uri="/screen/v2/idcmap"
+      uri="/api.json"
       method="get"
       :retry="2"
       :interval="2500"
@@ -17,6 +17,7 @@
 </template>
 <script>
 import SRequest from "../src/s-request.vue";
+
 export default {
   data() {
     return {};

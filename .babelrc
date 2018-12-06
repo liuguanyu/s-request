@@ -1,0 +1,17 @@
+{
+    "presets": [
+        ["env", {
+            "modules": false
+        }]
+    ],
+    "plugins": [
+        ["transform-runtime", {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true
+        }],
+        "transform-object-rest-spread",
+        "transform-object-entries"
+    ],
+    "sourceMaps": true
+}
