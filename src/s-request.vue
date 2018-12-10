@@ -129,6 +129,7 @@ export default {
       if (this.loading) {
         await this.loading(); // 支持异步loading
       }
+
       let res = await this.__request();
       this.__after(res);
     },
