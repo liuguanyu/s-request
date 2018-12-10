@@ -5,6 +5,8 @@ import axios from "axios";
 import { setInterval } from "timers";
 axios.defaults.baseURL = "/";
 
+import Vue from "vue";
+
 export default {
   name: "SRequest",
   props: {
@@ -59,6 +61,9 @@ export default {
     },
     fail: {
       type: Function
+    },
+    afterResponse: {
+      type: Function
     }
   },
 
@@ -80,6 +85,16 @@ export default {
         };
 
         if (JSON.stringify(this.params) !== "{}") {
+          if (this.input) {
+            let CheckInput = Vue.component("check-input", {
+              props: this.input
+            });
+
+            new CheckInput({
+              propsData: this.params
+            });
+          }
+
           cfg = {
             ...cfg,
             data: this.params
@@ -98,6 +113,7 @@ export default {
 
       try {
         res = await axios(this.opts());
+        res = this.afterResponse(res);
       } catch (e) {
         if (--this.nowRetry > 0) {
           return await this.__request();
@@ -123,6 +139,18 @@ export default {
           this.fail(res);
         }
       } else {
+        if (this.output) {
+          let CheckOutput = Vue.component("check-output", {
+            props: this.output
+          });
+
+          res = res;
+
+          new CheckOutput({
+            propsData: res
+          });
+        }
+
         if (this.format) {
           res = this.format(res);
         }

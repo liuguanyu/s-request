@@ -5,13 +5,18 @@
       uri="/api.json"
       method="get"
       :retry="2"
-      :interval="2500"
       :success="this.s"
       :fail="this.f"
       :loading="this.loading"
       :format="this.formatFun"
       :params="{a:1, b:1}"
       :input="{a: Number, b: Number}"
+      :output="{
+        errno: Number,
+        errmsg: String,
+        data: Object
+      }"
+      :afterResponse="data=>JSON.parse(JSON.stringify(data))"
     ></s-request>
   </div>
 </template>
