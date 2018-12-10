@@ -20,6 +20,7 @@
     ></s-request>
   </div>
 </template>
+
 <script>
 import SRequest from "../src/s-request.vue";
 
