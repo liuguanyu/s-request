@@ -43,6 +43,9 @@ export default {
     loading: {
       type: Function
     },
+    loadComplete: {
+      type: Function
+    },
     format: {
       type: Function
     },
@@ -143,6 +146,10 @@ export default {
       }
 
       let res = await this.__request();
+
+      if (this.loadComplete) {
+        await this.loadComplete(); // 支持异步loading
+      }
       this.__after(res);
     },
 
