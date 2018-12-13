@@ -152,3 +152,7 @@ methods:{
 	:afterResponse="data=>JSON.parse(JSON.stringify(data))"
 ></s-request>
 ```
+
+### 作为子组件，影响父级
+
+### 作为父组件，影响子级
