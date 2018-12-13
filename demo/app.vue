@@ -26,7 +26,9 @@ import SRequest from "../src/s-request.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      prevalue: 0
+    };
   },
   created() {},
   mounted() {},
@@ -44,6 +46,12 @@ export default {
     },
     formatFun(data) {
       return data;
+    },
+    condition() {
+      // setInterval(function() {
+      //   return ++this.prevalue > 10;
+      // }, 1000);
+      return true;
     }
   },
   components: {

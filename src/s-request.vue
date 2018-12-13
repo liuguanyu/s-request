@@ -85,16 +85,6 @@ export default {
         };
 
         if (JSON.stringify(this.params) !== "{}") {
-          if (this.input) {
-            let CheckInput = Vue.component("check-input", {
-              props: this.input
-            });
-
-            new CheckInput({
-              propsData: this.params
-            });
-          }
-
           cfg = {
             ...cfg,
             data: this.params
@@ -107,7 +97,24 @@ export default {
   },
 
   methods: {
-    __before() {},
+    __before() {
+      if (this.input) {
+        try {
+          let CheckInput = Vue.component("check-input", {
+            props: this.input
+          });
+
+          new CheckInput({
+            propsData: this.params
+          });
+        } catch (e) {
+          throw new Error(e.message);
+          return false;
+        }
+      }
+      return true;
+    },
+
     async __request() {
       let res;
 
@@ -125,7 +132,12 @@ export default {
     },
 
     async init() {
-      this.__before();
+      let ret = this.__before();
+
+      if (ret === false) {
+        return;
+      }
+
       if (this.loading) {
         await this.loading(); // 支持异步loading
       }
