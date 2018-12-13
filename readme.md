@@ -56,7 +56,7 @@ methods:{
 </s-request>
 ```
 
-如果参数不符合要求，则不会进行请求
+如果参数不符合要求，则不会进行请求。
 
 2. 对输出响应进行验证
 
@@ -82,7 +82,7 @@ methods:{
 
 3. 格式化输出
 
-通过指定:format，要求必须发挥格式化的数据。如果指定，这个方法将在 success 之前调用。
+通过指定:format，要求必须返回格式化的数据。如果指定，这个方法将在 success 之前调用。
 
 ```html
 <s-request
@@ -128,7 +128,7 @@ methods:{
 ></s-request>
 ```
 
-2. loading
+1. loading
 
 指定:loading，在请求时调用
 
