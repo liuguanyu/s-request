@@ -43,6 +43,19 @@ export default {
     loading: {
       type: Function
     },
+    upProvide: {
+      type: [String, Array],
+      validator: value => {
+        if (typeof value === "string") return true;
+
+        if (Object.prototype.toString.call(value) === "[object Array]") {
+          return value.every(el => typeof el === "string");
+        }
+
+        return false;
+      },
+      default: "data"
+    },
     loadComplete: {
       type: Function
     },
@@ -177,6 +190,16 @@ export default {
 
         if (this.success) {
           this.success(res);
+        }
+
+        // this.$parent[this.upProvide] = res.data;
+        if (typeof this.upProvide === "string") {
+          this.$parent[this.upProvide] = res.data;
+        } else {
+          this.upProvide.forEach(el => {
+            console.log(el);
+            this.$parent[el] = res[el];
+          });
         }
       }
     }

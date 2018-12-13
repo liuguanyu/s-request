@@ -1,23 +1,19 @@
 <template>
   <div>
     <h3>s-request演示</h3>
-    <s-request
-      uri="/api.json"
-      method="get"
-      :retry="2"
-      :success="this.s"
-      :fail="this.f"
-      :loading="this.loading"
-      :format="this.formatFun"
-      :params="{a:1, b:1}"
-      :input="{a: Number, b: Number}"
-      :output="{
-        errno: Number,
-        errmsg: String,
-        data: Object
-      }"
-      :afterResponse="data=>JSON.parse(JSON.stringify(data))"
-    ></s-request>
+    <div>
+      {{errno}}
+      <ul>
+        <li v-for="item in data">{{ item.title }}</li>
+      </ul>
+      <s-request
+        uri="/api.json"
+        method="get"
+        :interval="5000"
+        :upProvide="['data', 'errno']"
+        :afterResponse="data=>JSON.parse(JSON.stringify(data))"
+      ></s-request>
+    </div>
   </div>
 </template>
 
@@ -27,7 +23,8 @@ import SRequest from "../src/s-request.vue";
 export default {
   data() {
     return {
-      prevalue: 0
+      data: [],
+      errno: ""
     };
   },
   created() {},

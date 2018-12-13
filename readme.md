@@ -130,7 +130,7 @@ methods:{
 
 2. loading
 
-指定:loading，在请求时调用
+指定:loading，在请求时调用，此时还需要指定:loadingComplete，用于调用结束使用
 
 ```html
 <s-request
@@ -154,5 +154,44 @@ methods:{
 ```
 
 ### 作为子组件，影响父级
+
+设置:upProvide，此时调用成功，则将值赋予父级组件的对应值。:upProvide 可为字符串和数组。当为字符串时候，则就是这个字符串表达的变量。是数组的时候，依次去结果中找这些字段名复值。如果没有提供，则为 data 字段。
+
+```html
+<template>
+	<div>
+		<h3>s-request演示</h3>
+		<div>
+			{{errno}}
+			<ul>
+				<li v-for="item in data">{{ item.title }}</li>
+			</ul>
+			<s-request
+				uri="/api.json"
+				method="get"
+				:interval="5000"
+				:upProvide="['data', 'errno']"
+				:afterResponse="data=>JSON.parse(JSON.stringify(data))"
+			></s-request>
+		</div>
+	</div>
+</template>
+
+<script>
+	import SRequest from '../src/s-request.vue';
+
+	export default {
+		data() {
+			return {
+				data: [],
+				errno: '',
+			};
+		},
+		created() {},
+		mounted() {},
+		methods: {},
+	};
+</script>
+```
 
 ### 作为父组件，影响子级
