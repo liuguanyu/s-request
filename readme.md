@@ -128,7 +128,7 @@ methods:{
 ></s-request>
 ```
 
-1. loading
+2. loading
 
 指定:loading，在请求时调用
 
