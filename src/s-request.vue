@@ -2,10 +2,10 @@
 
 <script>
 import axios from "axios";
-import { setInterval } from "timers";
 axios.defaults.baseURL = "/";
 
 import Vue from "vue";
+import VFactory from "./vendors";
 
 export default {
   name: "SRequest",
@@ -86,9 +86,9 @@ export default {
   mounted() {
     this.init();
 
-    if (this.interval) {
-      setInterval(this.init, this.interval);
-    }
+    // if (this.interval) {
+    //   setInterval(this.init, this.interval);
+    // }
   },
 
   data() {
@@ -134,9 +134,15 @@ export default {
     async __request() {
       let res;
 
+      let vendor = (opts => {
+        return new VFactory().getByOpts(opts);
+      })(this.opts());
+
       try {
-        res = await axios(this.opts());
-        res = this.afterResponse(res);
+        res = await vendor.run(this.opts());
+        if (this.afterResponse) {
+          res = this.afterResponse(res);
+        }
       } catch (e) {
         if (--this.nowRetry > 0) {
           return await this.__request();
@@ -197,7 +203,6 @@ export default {
           this.$parent[this.upProvide] = res.data;
         } else {
           this.upProvide.forEach(el => {
-            console.log(el);
             this.$parent[el] = res[el];
           });
         }

@@ -11,7 +11,6 @@
         method="get"
         :interval="5000"
         :upProvide="['data', 'errno']"
-        :afterResponse="data=>JSON.parse(JSON.stringify(data))"
       ></s-request>
     </div>
   </div>
@@ -43,12 +42,6 @@ export default {
     },
     formatFun(data) {
       return data;
-    },
-    condition() {
-      // setInterval(function() {
-      //   return ++this.prevalue > 10;
-      // }, 1000);
-      return true;
     }
   },
   components: {
