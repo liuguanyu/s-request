@@ -86,9 +86,9 @@ export default {
   mounted() {
     this.init();
 
-    // if (this.interval) {
-    //   setInterval(this.init, this.interval);
-    // }
+    if (this.interval) {
+      setInterval(this.init, this.interval);
+    }
   },
 
   data() {
