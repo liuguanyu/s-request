@@ -1,9 +1,6 @@
 <template></template>
 
 <script>
-import axios from "axios";
-axios.defaults.baseURL = "/";
-
 import Vue from "vue";
 import VFactory from "./vendors";
 
@@ -83,6 +80,18 @@ export default {
     }
   },
 
+  install(Vue, opts) {
+    Vue.component("SRequest", this);
+
+    Vue.mixin({
+      created: function() {
+        if (opts && opts.baseURL) {
+          this.baseURL = opts.baseURL;
+        }
+      }
+    });
+  },
+
   mounted() {
     this.init();
 
@@ -136,10 +145,13 @@ export default {
 
       let vendor = (opts => {
         return new VFactory().getByOpts(opts);
-      })(this.opts());
+      })({
+        baseURL: this.baseURL,
+        ...this.opts()
+      });
 
       try {
-        res = await vendor.run(this.opts());
+        res = await vendor.run();
         if (this.afterResponse) {
           res = this.afterResponse(res);
         }

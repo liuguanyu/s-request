@@ -4,6 +4,9 @@ axios.defaults.baseURL = '/';
 export default class {
     constructor(opts) {
         this.opts = opts;
+        if (opts.baseURL) {
+            axios.defaults.baseURL = opts.baseURL;
+        }
     }
 
     async run() {

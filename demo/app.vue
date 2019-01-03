@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import SRequest from "../src/s-request.vue";
+// import SRequest from "../src/s-request.vue";
 
 export default {
   data() {
@@ -48,9 +48,6 @@ export default {
     formatFun(data) {
       return data;
     }
-  },
-  components: {
-    SRequest
   }
 };
 </script>
