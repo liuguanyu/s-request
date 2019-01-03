@@ -103,7 +103,7 @@ export default {
         if (JSON.stringify(this.params) !== "{}") {
           cfg = {
             ...cfg,
-            data: this.params
+            params: this.params
           };
         }
 

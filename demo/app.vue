@@ -9,7 +9,14 @@
           <span>{{ item.name }}</span>
         </li>
       </ul>
-      <s-request uri="/api.json" method="get" :interval="5000" :upProvide="['data', 'errno']"></s-request>
+      <s-request
+        uri="/api.json"
+        method="get"
+        :interval="5000"
+        :input="{a:Number}"
+        :params="{a:1}"
+        :upProvide="['data', 'errno']"
+      ></s-request>
     </div>
   </div>
 </template>
