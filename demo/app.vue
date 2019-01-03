@@ -2,16 +2,14 @@
   <div>
     <h3>s-request演示</h3>
     <div>
-      {{errno}}
+      错误码：{{errno}}
       <ul>
-        <li v-for="item in data">{{ item.title }}</li>
+        <li v-for="item in data">
+          <span>{{ item.title }}</span>
+          <span>{{ item.name }}</span>
+        </li>
       </ul>
-      <s-request
-        uri="/api.json"
-        method="get"
-        :interval="5000"
-        :upProvide="['data', 'errno']"
-      ></s-request>
+      <s-request uri="/api.json" method="get" :interval="5000" :upProvide="['data', 'errno']"></s-request>
     </div>
   </div>
 </template>
