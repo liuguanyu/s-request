@@ -13,9 +13,7 @@ export default class {
 
         switch (method) {
             case 'post':
-                return await axios.post(opts.url, {
-                    params
-                });
+                return await axios.post(opts.url, params);
                 break;
             case 'get':
             default:
