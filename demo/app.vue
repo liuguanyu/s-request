@@ -15,6 +15,7 @@
         :interval="5000"
         :input="{a:Number}"
         :params="{a:1}"
+        :request_condition="this.rc"
         :upProvide="['data', 'errno']"
       ></s-request>
     </div>
@@ -22,13 +23,12 @@
 </template>
 
 <script>
-// import SRequest from "../src/s-request.vue";
-
 export default {
   data() {
     return {
       data: [],
-      errno: ""
+      errno: "",
+      test: false
     };
   },
   created() {},
@@ -47,6 +47,10 @@ export default {
     },
     formatFun(data) {
       return data;
+    },
+    rc() {
+      this.test = !this.test;
+      return this.test;
     }
   }
 };

@@ -4,98 +4,29 @@
 import Vue from "vue";
 import VFactory from "./vendors";
 
+import props from "./props";
+
 export default {
   name: "SRequest",
-  props: {
-    method: {
-      validator: value => {
-        return ["get", "post"].indexOf(value.toLowerCase()) !== -1;
-      },
-      default: "get"
-    },
-    uri: {
-      type: String,
-      required: true
-    },
-    params: {
-      type: Object,
-      default: () => {}
-    },
-    input: {
-      type: Object,
-      default: () => {}
-    },
-    output: {
-      type: Object,
-      default: () => {}
-    },
-    retry: {
-      type: Number,
-      default: 0
-    },
-    interval: {
-      type: Number,
-      default: 0
-    },
-    loading: {
-      type: Function
-    },
-    upProvide: {
-      type: [String, Array],
-      validator: value => {
-        if (typeof value === "string") return true;
-
-        if (Object.prototype.toString.call(value) === "[object Array]") {
-          return value.every(el => typeof el === "string");
-        }
-
-        return false;
-      },
-      default: "data"
-    },
-    loadComplete: {
-      type: Function
-    },
-    format: {
-      type: Function
-    },
-    request_condition: {
-      type: [Function, Boolean],
-      default: true
-    },
-    dependency: {
-      type: String,
-      validator: value => {
-        return eval(value) !== undefined;
-      }
-    },
-    success: {
-      type: Function
-    },
-    fail: {
-      type: Function
-    },
-    afterResponse: {
-      type: Function
-    }
-  },
+  props: props,
 
   install(Vue, opts) {
     Vue.component("SRequest", this);
 
-    Vue.mixin({
+    let mixin = {
       created: function() {
         this.baseOpts = opts ? opts : {};
       }
-    });
+    };
+
+    Vue.mixin(mixin);
   },
 
   mounted() {
     this.init();
-
-    if (this.interval) {
-      setInterval(this.init, this.interval);
-    }
+    // if (this.interval) {
+    //   setInterval(this.init, this.interval);
+    // }
   },
 
   data() {
@@ -150,9 +81,6 @@ export default {
 
       try {
         res = await vendor.run();
-        if (this.afterResponse) {
-          res = this.afterResponse(res);
-        }
       } catch (e) {
         if (--this.nowRetry > 0) {
           return await this.__request();
