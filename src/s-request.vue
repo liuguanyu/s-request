@@ -85,9 +85,7 @@ export default {
 
     Vue.mixin({
       created: function() {
-        if (opts && opts.baseURL) {
-          this.baseURL = opts.baseURL;
-        }
+        this.baseOpts = opts ? opts : {};
       }
     });
   },
@@ -105,6 +103,7 @@ export default {
       nowRetry: this.retry,
       opts: () => {
         let cfg = {
+          ...this.baseOpts,
           method: this.method,
           url: this.uri
         };
@@ -146,7 +145,6 @@ export default {
       let vendor = (opts => {
         return new VFactory().getByOpts(opts);
       })({
-        baseURL: this.baseURL,
         ...this.opts()
       });
 

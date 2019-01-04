@@ -1,9 +1,10 @@
 import axios from 'axios';
-axios.defaults.baseURL = '/';
+// axios.defaults.baseURL = '/';
 
 export default class {
     constructor(opts) {
         this.opts = opts;
+
         if (opts.baseURL) {
             axios.defaults.baseURL = opts.baseURL;
         }
