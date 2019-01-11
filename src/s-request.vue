@@ -61,17 +61,12 @@ export default {
         return true;
       }
 
-      // let validatorProxy = new JSONSchemaValidatorProxy();
-      // let ret = validatorProxy.validate(this.params, this.input);
-
-      // console.log(ret, 66);
-
       let schema = Props2Schema(this.input);
       let validator = new JSONSchemaValidator();
-      console.log(JSON.stringify(schema));
+
       validator.validate(this.params, schema);
 
-      return true;
+      return validator.errors.length === 0;
     },
 
     async __request() {
