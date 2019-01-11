@@ -12,9 +12,9 @@
       <s-request
         uri="/api.json"
         method="get"
-        :interval="5000"
-        :input="{a:Number}"
-        :params="{a:1}"
+        :interval="500"
+        :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
+        :params='{"a": {"c": 1},"b": "111"}'
         :request_condition="this.rc"
         :upProvide="['data', 'errno']"
       ></s-request>

@@ -4,7 +4,11 @@
 import Vue from "vue";
 import VFactory from "./vendors";
 
-import props from "./props";
+import props from "./partials/props";
+import utils from "./partials/utils";
+
+import Props2Schema from "./libs/props2schema";
+import JSONSchemaValidator from "./libs/json-schema-validator/json-schema-validator";
 
 export default {
   name: "SRequest",
@@ -53,20 +57,20 @@ export default {
 
   methods: {
     __before() {
-      if (this.input) {
-        try {
-          let CheckInput = Vue.component("check-input", {
-            props: this.input
-          });
-
-          new CheckInput({
-            propsData: this.params
-          });
-        } catch (e) {
-          throw new Error(e.message);
-          return false;
-        }
+      if (!this.input) {
+        return true;
       }
+
+      // let validatorProxy = new JSONSchemaValidatorProxy();
+      // let ret = validatorProxy.validate(this.params, this.input);
+
+      // console.log(ret, 66);
+
+      let schema = Props2Schema(this.input);
+      let validator = new JSONSchemaValidator();
+      console.log(JSON.stringify(schema));
+      validator.validate(this.params, schema);
+
       return true;
     },
 
