@@ -1,6 +1,6 @@
 {
   "name": "s-request",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "./production/vue-s-request.min.js",
   "scripts": {
@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "vee-validate": "^2.1.5",
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-props-schema": "1.0.5"
   }
 }

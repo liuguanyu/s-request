@@ -7,7 +7,7 @@ import VFactory from "./vendors";
 import props from "./partials/props";
 import utils from "./partials/utils";
 
-import Props2Schema from "./libs/props2schema";
+import Props2Schema from "vue-props-schema";
 import JSONSchemaValidator from "./libs/json-schema-validator/json-schema-validator";
 
 export default {
