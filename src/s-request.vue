@@ -15,7 +15,7 @@ const isPropValid = (instance, rules) => {
   let validator = new JSONSchemaValidator();
 
   validator.validate(instance, schema);
-  return validator.errors === 0;
+  return validator.errors.length === 0;
 };
 
 export default {
