@@ -10,6 +10,14 @@ import utils from "./partials/utils";
 import Props2Schema from "vue-props-schema";
 import JSONSchemaValidator from "q-schema-validator";
 
+const isPropValid = (instance, rules) => {
+  let schema = Props2Schema(rules);
+  let validator = new JSONSchemaValidator();
+
+  validator.validate(instance, schema);
+  return validator.errors === length;
+};
+
 export default {
   name: "SRequest",
   props: props,
@@ -61,13 +69,7 @@ export default {
         return true;
       }
 
-      let schema = Props2Schema(this.input);
-      let validator = new JSONSchemaValidator();
-
-      validator.validate(this.params, schema);
-      console.log(validator.errors, 68);
-
-      return validator.errors.length === 0;
+      return isPropValid(this.params, this.input);
     },
 
     async __request() {
@@ -117,15 +119,13 @@ export default {
         }
       } else {
         if (this.output) {
-          let CheckOutput = Vue.component("check-output", {
-            props: this.output
-          });
-
-          res = res;
-
-          new CheckOutput({
-            propsData: res
-          });
+          let ret = isPropValid(res, this.output);
+          if (!ret) {
+            if (this.fail) {
+              this.fail(res);
+            }
+          }
+          return;
         }
 
         if (this.format) {
