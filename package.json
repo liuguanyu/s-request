@@ -31,7 +31,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "vee-validate": "^2.1.5",
+    "q-schema-validator": "0.0.2",
     "vue": "^2.5.17",
     "vue-props-schema": "1.0.5"
   }

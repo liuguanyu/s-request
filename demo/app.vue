@@ -14,7 +14,7 @@
         method="get"
         :interval="500"
         :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
-        :params='{"a": {"c": 1},"b": "111"}'
+        :params='{"a": {"c": 1, "e": 111},"b": "111"}'
         :request_condition="this.rc"
         :upProvide="['data', 'errno']"
       ></s-request>

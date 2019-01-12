@@ -8,7 +8,7 @@ import props from "./partials/props";
 import utils from "./partials/utils";
 
 import Props2Schema from "vue-props-schema";
-import JSONSchemaValidator from "./libs/json-schema-validator/json-schema-validator";
+import JSONSchemaValidator from "q-schema-validator";
 
 export default {
   name: "SRequest",
@@ -65,6 +65,7 @@ export default {
       let validator = new JSONSchemaValidator();
 
       validator.validate(this.params, schema);
+      console.log(validator.errors, 68);
 
       return validator.errors.length === 0;
     },
