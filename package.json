@@ -5,7 +5,7 @@
   "main": "./production/vue-s-request.min.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --hot --inline --config=./build/webpack.config.js --port=6080 --content-base ./demo --host 0.0.0.0 --open",
-    "release": "NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.production.js"
+    "prepublish": "NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.production.js"
   },
   "keywords": [],
   "author": "",

@@ -10,7 +10,7 @@ module.exports = {
         vuesrequest: "./src/s-request.vue"
     },
     output: {
-        path: resolve("production"),
+        path: resolve("dist"),
         filename: "[name].min.js",
         library: "vuefileupload",
         libraryTarget: "umd"
