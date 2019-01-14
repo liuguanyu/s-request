@@ -10,6 +10,8 @@ import utils from "./partials/utils";
 import Props2Schema from "vue-props-schema";
 import JSONSchemaValidator from "q-schema-validator";
 
+import { HttpError } from "./errors/";
+
 const isPropValid = (instance, rules) => {
   let schema = Props2Schema(rules);
   let validator = new JSONSchemaValidator();
@@ -17,6 +19,24 @@ const isPropValid = (instance, rules) => {
   validator.validate(instance, schema);
   return validator.errors.length === 0;
 };
+
+const dealWithHttpFail = function(res) {
+  let opts = {
+    ...this.opts()
+  };
+
+  if (res["code"] && this["fail"] && this["fail"]["fail" + res.code]) {
+    this["fail"]["fail" + res.code](res);
+  } else if (res["code"] && this["fail"] && this["fail"]["fail" + res.code]) {
+    opts["fail"]["fail" + res.code](res);
+  } else if (this["fail"] && typeof this["fail"] == "function") {
+    this["fail"](res);
+  } else if (opts["fail"] && typeof opts["fail"] == "function") {
+    opts["fail"](res);
+  }
+};
+
+const dealWithBizFail = function(res) {};
 
 export default {
   name: "SRequest",
@@ -36,9 +56,10 @@ export default {
 
   mounted() {
     this.init();
-    // if (this.interval) {
-    //   setInterval(this.init, this.interval);
-    // }
+
+    if (this.interval) {
+      setInterval(this.init, this.interval);
+    }
   },
 
   data() {
@@ -87,9 +108,10 @@ export default {
         if (--this.nowRetry > 0) {
           return await this.__request();
         } else {
-          return new Error("Request Error!");
+          return e;
         }
       }
+
       return res.data;
     },
 
@@ -109,23 +131,20 @@ export default {
       if (this.loadComplete) {
         await this.loadComplete(); // 支持异步loading
       }
+
       this.__after(res);
     },
 
     __after(res) {
-      if (res instanceof Error) {
-        if (this.fail) {
-          this.fail(res);
-        }
+      if (res instanceof HttpError) {
+        dealWithHttpFail.call(this, res);
       } else {
         if (this.output) {
           let ret = isPropValid(res, this.output);
           if (!ret) {
-            if (this.fail) {
-              this.fail(res);
-            }
+            dealWithBizFail.call(this, res);
+            return;
           }
-          return;
         }
 
         if (this.format) {
@@ -136,7 +155,6 @@ export default {
           this.success(res);
         }
 
-        // this.$parent[this.upProvide] = res.data;
         if (typeof this.upProvide === "string") {
           this.$parent[this.upProvide] = res.data;
         } else {

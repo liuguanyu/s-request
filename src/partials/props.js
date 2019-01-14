@@ -92,6 +92,17 @@ export default {
 
     /* 请求失败函数 */
     fail: {
-        type: Function
+        type: [Function, Object],
+        validator: value => {
+            if (typeof value === "function") {
+                return true;
+            }
+
+            let keys = Object.keys(value);
+
+            return keys.every(el => {
+                return /^fail[0-9]*$/.test(el) && typeof value[el] === "function"
+            });
+        }
     }
 }

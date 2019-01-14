@@ -10,13 +10,13 @@
         </li>
       </ul>
       <s-request
-        uri="/api.json"
+        uri="/api.json1"
         method="get"
-        :interval="500"
+        :retry="5"
         :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
         :params='{"a": {"c": 1, "e": 111},"b": "111"}'
-        :request_condition="this.rc"
         :upProvide="['data', 'errno']"
+        :fail="this.failing"
       ></s-request>
     </div>
   </div>
@@ -28,7 +28,10 @@ export default {
     return {
       data: [],
       errno: "",
-      test: false
+      test: false,
+      failing: {
+        'fail401':function (){}
+      }
     };
   },
   created() {},
@@ -41,6 +44,9 @@ export default {
     },
     f(err) {
       console.log(err);
+    },
+    f404(res){
+      console.log(111);
     },
     loading() {
       console.log("loading...");
