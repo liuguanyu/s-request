@@ -9,8 +9,6 @@ export default class {
         this.opts = opts;
         this.axios = axios.create();
 
-        console.log(process.env.NODE_ENV, 12);
-
         if (opts.baseURL) {
             this.axios.defaults.baseURL = opts.baseURL;
         }
