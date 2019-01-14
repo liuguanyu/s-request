@@ -3,7 +3,20 @@ import App from './app.vue';
 
 import SRequest from '../src/s-request.vue';
 
-Vue.use(SRequest);
+import path from 'path';
+
+if (process.env.NODE_ENV === "development"){
+	let mock = require('../mock').default;
+
+	Vue.use(SRequest, {
+	    mocker: mock
+	});
+}
+else {
+	Vue.use(SRequest, {
+	});
+}
+
 
 new Vue({
     el: "#app",

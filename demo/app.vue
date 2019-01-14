@@ -30,7 +30,7 @@ export default {
       errno: "",
       test: false,
       failing: {
-        'fail401':function (){}
+        fail401: function() {}
       }
     };
   },
@@ -45,7 +45,7 @@ export default {
     f(err) {
       console.log(err);
     },
-    f404(res){
+    f404(res) {
       console.log(111);
     },
     loading() {

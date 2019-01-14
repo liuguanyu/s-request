@@ -104,5 +104,12 @@ export default {
                 return /^fail[0-9]*$/.test(el) && typeof value[el] === "function"
             });
         }
+    },
+
+    mock: {
+        type: String,
+        validator: value => {
+            return true
+        }
     }
 }
