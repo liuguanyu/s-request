@@ -1,38 +1,37 @@
 {
-  "name": "s-request",
-  "version": "1.0.6",
-  "description": "",
-  "main": "./production/vue-s-request.min.js",
-  "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --hot --inline --config=./build/webpack.config.js --port=6080 --content-base ./demo --host 0.0.0.0 --open",
-    "prepublish": "NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.production.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "axios": "^0.18.0",
-    "babel-core": "^6.26.0",
-    "babel-loader": "6.2.7",
-    "babel-plugin-transform-object-entries": "^1.0.0",
-    "babel-plugin-transform-runtime": "^6.8.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "css-loader": "^0.28.7",
-    "file-loader": "^0.8.4",
-    "friendly-errors-webpack-plugin": "^1.6.1",
-    "jade": "^1.11.0",
-    "vue-loader": "13.0.4",
-    "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.4.2",
-    "webpack": "^3.5.5",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^2.7.1",
-    "webpack-merge": "^4.1.0"
-  },
-  "dependencies": {
-    "q-schema-validator": "0.0.2",
-    "vue": "^2.5.17",
-    "vue-props-schema": "1.0.5"
-  }
+	"name": "s-request",
+	"version": "1.0.7",
+	"description": "",
+	"main": "./production/vue-s-request.min.js",
+	"scripts": {
+		"start": "NODE_ENV=development webpack-dev-server --hot --inline --config=./build/webpack.config.js --port=6080 --content-base ./demo --host 0.0.0.0 --open",
+		"prepublish": "NODE_ENV=production ./node_modules/.bin/webpack --config ./build/webpack.production.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"axios": "^0.18.0",
+		"babel-core": "^6.26.0",
+		"babel-loader": "6.2.7",
+		"babel-plugin-transform-object-entries": "^1.0.0",
+		"babel-plugin-transform-runtime": "^6.8.0",
+		"babel-preset-env": "^1.6.0",
+		"babel-preset-stage-2": "^6.24.1",
+		"css-loader": "^0.28.7",
+		"file-loader": "^0.8.4",
+		"friendly-errors-webpack-plugin": "^1.6.1",
+		"vue-loader": "13.0.4",
+		"vue-style-loader": "^3.0.1",
+		"vue-template-compiler": "^2.4.2",
+		"webpack": "^3.5.5",
+		"webpack-cli": "^3.1.2",
+		"webpack-dev-server": "^2.7.1",
+		"webpack-merge": "^4.1.0"
+	},
+	"dependencies": {
+		"q-schema-validator": "0.0.2",
+		"vue": "^2.5.17",
+		"vue-props-schema": "1.0.5"
+	}
 }

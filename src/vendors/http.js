@@ -7,11 +7,16 @@ import {
 export default class {
     constructor(opts) {
         this.opts = opts;
-        this.axios = axios.create();
+        let headers = opts["headers"] ? opts["headers"] : {};
+        this.axios = axios.create({
+            headers
+        });
 
         if (opts.baseURL) {
             this.axios.defaults.baseURL = opts.baseURL;
         }
+
+
 
         this.axios.interceptors.response.use(function (response) {
             return response;
