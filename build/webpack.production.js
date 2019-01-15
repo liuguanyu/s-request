@@ -55,12 +55,13 @@ module.exports = {
             banner: "created by marchFantasy",
             raw: false,
             entryOnly: true
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false,
-            compress: {
-                warnings: false
-            }
-        }),
+        })
+        /*,
+                new webpack.optimize.UglifyJsPlugin({
+                    sourceMap: false,
+                    compress: {
+                        warnings: false
+                    }
+                }),*/
     ]
 };
