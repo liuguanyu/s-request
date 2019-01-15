@@ -1,23 +1,21 @@
 <template>
   <div>
     <h3>s-request演示</h3>
-    <div>
-      错误码：{{errno}}
+    <div>错误码：
       <ul>
-        <li v-for="item in data">
+        <li v-for="item in datas">
           <span>{{ item.title }}</span>
           <span>{{ item.name }}</span>
         </li>
       </ul>
       <s-request
         uri="/api.json"
-        :interval="5000"
         method="get"
         :retry="5"
         :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
         :params="this.p"
-        :upProvide="['data', 'errno']"
         :fail="this.failing"
+        upProvide="datas"
       ></s-request>
     </div>
   </div>
@@ -27,7 +25,7 @@
 export default {
   data() {
     return {
-      data: [],
+      datas: [],
       errno: "",
       test: false,
       failing: {

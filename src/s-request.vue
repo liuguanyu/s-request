@@ -156,7 +156,7 @@ export default {
         }
 
         if (typeof this.upProvide === "string") {
-          this.$parent[this.upProvide] = res.data;
+          this.$parent[this.upProvide] = res[this.upProvide];
         } else {
           this.upProvide.forEach(el => {
             this.$parent[el] = res[el];
