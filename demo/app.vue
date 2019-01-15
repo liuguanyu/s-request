@@ -10,11 +10,12 @@
         </li>
       </ul>
       <s-request
-        uri="/api.json1"
+        uri="/api.json"
+        :interval="5000"
         method="get"
         :retry="5"
         :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
-        :params='{"a": {"c": 1, "e": 111},"b": "111"}'
+        :params="this.p"
         :upProvide="['data', 'errno']"
         :fail="this.failing"
       ></s-request>
@@ -31,7 +32,8 @@ export default {
       test: false,
       failing: {
         fail401: function() {}
-      }
+      },
+      p: { a: { c: 1, e: 111 }, b: "111" }
     };
   },
   created() {},
