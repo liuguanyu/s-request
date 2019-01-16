@@ -40,6 +40,10 @@ const dealWithBizFail = function(res) {};
 export default {
   name: "SRequest",
   props: props,
+  model: {
+    prop: "__data",
+    event: "__requested_data"
+  },
   install(Vue, opts) {
     Vue.component("SRequest", this);
     let mixin = {
@@ -151,11 +155,14 @@ export default {
         }
 
         if (typeof this.upProvide === "string") {
-          this.$parent[this.upProvide] = res[this.upProvide];
+          // this.$parent[this.upProvide] = res[this.upProvide];
+          this.$emit("__requested_data", res[this.upProvide]);
         } else {
+          let ret = {};
           this.upProvide.forEach(el => {
-            this.$parent[el] = res[el];
+            ret[el] = res[el];
           });
+          this.$emit("__requested_data", ret);
         }
       }
     }
