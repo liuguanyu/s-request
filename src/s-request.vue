@@ -1,7 +1,6 @@
 <template></template>
 
 <script>
-import Vue from "vue";
 import VFactory from "./vendors";
 
 import props from "./partials/props";
@@ -41,18 +40,6 @@ const dealWithBizFail = function(res) {};
 export default {
   name: "SRequest",
   props: props,
-
-  install(Vue, opts) {
-    Vue.component("SRequest", this);
-
-    let mixin = {
-      created: function() {
-        this.baseOpts = opts ? opts : {};
-      }
-    };
-
-    Vue.mixin(mixin);
-  },
 
   mounted() {
     this.init();

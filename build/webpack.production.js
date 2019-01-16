@@ -1,5 +1,5 @@
 var webpack = require("webpack");
-var vueLoaderConfig = require('./vue-loader.conf.js')
+var path = require('path');
 
 var {
     resolve
@@ -7,26 +7,29 @@ var {
 
 module.exports = {
     entry: {
-        vuesrequest: "./src/s-request.vue"
+        index: './index.js',
     },
     output: {
-        path: resolve("dist"),
-        filename: "[name].min.js",
-        library: "vuefileupload",
-        libraryTarget: "umd"
+        path: path.resolve(__dirname, '../dist'),
+        filename: 's-request.js',
+        library: 's-request',
+        libraryTarget: 'umd',
+        publicPath: '/dist/',
+        umdNamedDefine: true
     },
     resolve: {
-        extensions: [".js", ".vue", ".json"],
-        modules: [resolve("node_modules")],
         alias: {
-            'vue$': 'vue/dist/vue.js'
-        }
+            'vue$': 'vue/dist/vue.esm.js'
+        },
+        extensions: ['*', '.js', '.vue', '.json']
     },
     module: {
         rules: [{
                 test: /\.vue$/,
                 loader: "vue-loader",
-                options: vueLoaderConfig
+                options: {
+                    loaders: {}
+                }
             },
             {
                 test: /\.js$/,
@@ -47,21 +50,18 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            "process.env": {
+            'process.env': {
                 NODE_ENV: '"production"'
             }
         }),
-        new webpack.BannerPlugin({
-            banner: "created by marchFantasy",
-            raw: false,
-            entryOnly: true
+        // new webpack.optimize.UglifyJsPlugin({
+        //     sourceMap: true,
+        //     compress: {
+        //         warnings: false
+        //     }
+        // }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
         })
-        /*,
-                new webpack.optimize.UglifyJsPlugin({
-                    sourceMap: false,
-                    compress: {
-                        warnings: false
-                    }
-                }),*/
     ]
 };
