@@ -787,24 +787,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_s_request__ = __webpack_require__(10);
 
 
-if (typeof window !== 'undefined' && window.Vue) {
-    const install = (Vue, opts = {}) => {
-        Vue.component(__WEBPACK_IMPORTED_MODULE_0__src_s_request__["a" /* default */].name, __WEBPACK_IMPORTED_MODULE_0__src_s_request__["a" /* default */]);
-
-        let mixin = {
-            created: () => {
-                this.baseOpts = opts ? opts : {};
-            }
-        };
-
-        Vue.mixin(mixin);
-    }
-
-    if (typeof window !== 'undefined' && window.Vue) {
-        install(window.Vue, opts);
-    }
-}
-
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__src_s_request__["a" /* default */]);
 
 /***/ }),
@@ -994,7 +976,15 @@ var dealWithBizFail = function dealWithBizFail(res) {};
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "SRequest",
   props: __WEBPACK_IMPORTED_MODULE_2__partials_props__["a" /* default */],
-
+  install: function install(Vue, opts) {
+    Vue.component("SRequest", this);
+    var mixin = {
+      created: function created() {
+        this.baseOpts = opts ? opts : {};
+      }
+    };
+    Vue.mixin(mixin);
+  },
   mounted: function mounted() {
     this.init();
 
