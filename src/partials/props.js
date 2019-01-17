@@ -12,18 +12,16 @@ export default {
         required: true
     },
 
-    /* 输入参数 */
-    params: {
-        type: Object,
-        default: () => {}
-    },
-
     /* 输入参数验证方法 */
     input: {
         type: Object,
         default: () => {}
     },
 
+    params: {
+        type: Object,
+        default: () => {}
+    },
     /* 输出参数验证方法 */
     output: {
         type: Object,
@@ -103,13 +101,6 @@ export default {
             return keys.every(el => {
                 return /^fail[0-9]*$/.test(el) && typeof value[el] === "function"
             });
-        }
-    },
-
-    mock: {
-        type: String,
-        validator: value => {
-            return true
         }
     }
 }

@@ -976,6 +976,10 @@ var dealWithBizFail = function dealWithBizFail(res) {};
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "SRequest",
   props: __WEBPACK_IMPORTED_MODULE_2__partials_props__["a" /* default */],
+  model: {
+    prop: "__data",
+    event: "__requested_data"
+  },
   install: function install(Vue, opts) {
     Vue.component("SRequest", this);
     var mixin = {
@@ -1139,8 +1143,6 @@ var dealWithBizFail = function dealWithBizFail(res) {};
       return init;
     }(),
     __after: function __after(res) {
-      var _this2 = this;
-
       if (res instanceof __WEBPACK_IMPORTED_MODULE_6__errors___["a" /* HttpError */]) {
         dealWithHttpFail.call(this, res);
       } else {
@@ -1161,11 +1163,14 @@ var dealWithBizFail = function dealWithBizFail(res) {};
         }
 
         if (typeof this.upProvide === "string") {
-          this.$parent[this.upProvide] = res[this.upProvide];
+          // this.$parent[this.upProvide] = res[this.upProvide];
+          this.$emit("__requested_data", res[this.upProvide]);
         } else {
+          var _ret = {};
           this.upProvide.forEach(function (el) {
-            _this2.$parent[el] = res[el];
+            _ret[el] = res[el];
           });
+          this.$emit("__requested_data", _ret);
         }
       }
     }

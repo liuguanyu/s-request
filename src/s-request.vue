@@ -134,6 +134,12 @@ export default {
       this.__after(res);
     },
 
+    force() {
+      this.$nextTick(_ => {
+        this.init();
+      });
+    },
+
     __after(res) {
       if (res instanceof HttpError) {
         dealWithHttpFail.call(this, res);
