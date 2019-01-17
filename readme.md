@@ -205,6 +205,29 @@ this.f = {
 ></s-request>
 ```
 
+#### 主动触发请求
+
+加入`ref`
+
+```html
+    <s-request
+      ref="sr_stream"
+      uri="/screen/v2/globalttl"
+      v-model="data_stream"
+      :interval="60000"
+      :success="this.setStreamInfo"
+    ></s-request>
+```
+
+可以先更新请求数据，之后调用方法：
+
+```javascript
+    this.params = {
+      offset: searchTime - now
+    };
+    this.$refs.sr.force();
+```
+
 
 #### loading
 
