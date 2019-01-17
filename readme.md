@@ -36,6 +36,7 @@ npm install s-request --S
     return {
       data: {}
     };
+  }
 ```
 
 名称应当与`v-model`所示变量一致。
@@ -259,7 +260,7 @@ this.f = {
 
 ```javascript
 Vue.use(SRequest, {
-  baseURL: "http://bigscreen.aiops.soft.360.cn",
+  baseURL: "http://xxx.xxx.xxx.com/path",
   headers: {
     "src": "aiops"
   }
