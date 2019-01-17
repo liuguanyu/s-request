@@ -16,7 +16,7 @@
         :input="{a:{c: {type: [Number, String], required: true, default: 0}, d: String, e: {type: Number, required: true}}, b:{type: String, required: true}, f: {type: String, required: true, default: '1'}}"
         :params="this.p"
         :fail="this.failing"
-        upProvide="datas"
+        provide="datas"
         v-model="data"
       ></s-request>
       <input type="button" value="马上请求" v-on:click="this.forceRequest">
