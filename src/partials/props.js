@@ -46,7 +46,7 @@ export default {
     },
 
     /* 将数据集的对应字段同步到父级组件 */
-    upProvide: {
+    provide: {
         type: [String, Array],
         validator: value => {
             if (typeof value === "string") return true;

@@ -1,6 +1,6 @@
 {
   "name": "s-request",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "",
   "main": "./index.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "webpack-merge": "^4.1.0"
   },
   "dependencies": {
-    "q-schema-validator": "0.0.2",
+    "q-schema-validator": "0.0.3",
     "vue": "^2.5.17",
     "vue-props-schema": "1.0.5"
   }

@@ -156,19 +156,22 @@ export default {
           res = this.format(res);
         }
 
-        if (this.success) {
-          this.success(res);
-        }
-
         if (typeof this.upProvide === "string") {
           // this.$parent[this.upProvide] = res[this.upProvide];
-          this.$emit("__requested_data", res[this.upProvide]);
+          this.$emit("__requested_data", res[this.provide]);
+
+          if (this.success) {
+            this.success(res[this.provide]);
+          }
         } else {
           let ret = {};
-          this.upProvide.forEach(el => {
+          this.provide.forEach(el => {
             ret[el] = res[el];
           });
           this.$emit("__requested_data", ret);
+          if (this.success) {
+            this.success(ret);
+          }
         }
       }
     }
