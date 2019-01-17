@@ -156,7 +156,7 @@ export default {
           res = this.format(res);
         }
 
-        if (typeof this.upProvide === "string") {
+        if (typeof this.provide === "string") {
           // this.$parent[this.upProvide] = res[this.upProvide];
           this.$emit("__requested_data", res[this.provide]);
 
