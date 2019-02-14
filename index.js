@@ -1,3 +1,3 @@
-import SRquest from './src/s-request';
+import SRquest from './dist/s-request';
 
 export default SRquest;
