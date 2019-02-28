@@ -1,6 +1,6 @@
 {
   "name": "s-request",
-  "version": "1.0.16-alpha",
+  "version": "1.0.16-beta",
   "description": "",
   "main": "./index.js",
   "scripts": {
