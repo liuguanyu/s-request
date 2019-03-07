@@ -49,9 +49,11 @@ export default class {
 				break;
 			case 'get':
 			default:
-				return await this.axios.get(opts.url, {
-					params,
-				});
+				return params && JSON.stringify(params) !== undefined
+					? await this.axios.get(opts.url, {
+							params,
+					  })
+					: await this.axios.get(opts.url);
 				break;
 		}
 	}
