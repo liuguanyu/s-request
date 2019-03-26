@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-import { HttpError } from '../errors/';
+import {
+	HttpError
+} from '../errors/';
 
 export default class {
 	constructor(opts) {
@@ -15,10 +17,10 @@ export default class {
 		}
 
 		this.axios.interceptors.response.use(
-			function(response) {
+			function (response) {
 				return response;
 			},
-			function(error) {
+			function (error) {
 				let status = error.response.status;
 				let err = new HttpError('Error http request', 404, error);
 
@@ -31,6 +33,14 @@ export default class {
 		let opts = this.opts;
 		let params = opts.params ? opts.params : undefined;
 		let method = opts.method ? opts.method.toLowerCase() : 'get';
+
+		if (opts.cache === undefined || opts.cache === false) {
+			params = params === undefined ? {} : params;
+
+			params = Object.assign(params, {
+				"__timestamp": +new Date()
+			});
+		}
 
 		switch (method) {
 			case 'post':
@@ -49,11 +59,11 @@ export default class {
 				break;
 			case 'get':
 			default:
-				return params && JSON.stringify(params) !== undefined
-					? await this.axios.get(opts.url, {
-							params,
-					  })
-					: await this.axios.get(opts.url);
+				return params && JSON.stringify(params) !== undefined ?
+					await this.axios.get(opts.url, {
+						params,
+					}) :
+					await this.axios.get(opts.url);
 				break;
 		}
 	}

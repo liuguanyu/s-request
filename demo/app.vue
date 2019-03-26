@@ -1,7 +1,8 @@
 <template>
   <div>
     <h3>s-request演示</h3>
-    <div>错误码：
+    <div>
+      错误码：
       <ul>
         <li v-for="item in data">
           <span>{{ item.title }}</span>
